@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FakeEnemy
   - RealEnemy
+  - Destination
+  - LevelLoader
   layers:
   - Default
   - TransparentFX

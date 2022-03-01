@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] int health = 100;
+    [SerializeField] int maxHealth = 100;
+    int health;
+    LevelManager levelManager;
+
+    private void Awake()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        health = maxHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -13,7 +22,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Die");
+        levelManager.LoadGameOver();
+        Destroy(gameObject);
     }
 
     public int GetHealth()

@@ -15,11 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Move Stat")]
     [SerializeField] float moveSpeed = 0.25f;
     [SerializeField] float maxHorizontalSpeed = 3f;
+    [SerializeField] float maxVerticalSpeed = 8f;
     [SerializeField] float hVelocityDampingWhenStopping = 0.5f;
     [SerializeField] float hVelocityDampingWhenTurning = 0.5f;
 
     [SerializeField] float jumpSpeed = 10f;
-    [SerializeField] float maxVerticalSpeed = 10f;
     [SerializeField] float jumpBufferDuration = 0.2f;
     [SerializeField] float jumpBufferCountdown = 0f;
     [SerializeField] float coyoteTimeDuration = 0.2f;
@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         Move();
         Jump();
+        FlipSprite();
     }
 
     void MoveInputListener(InputAction.CallbackContext context)
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         Vector2 currentVelocity = myRigidbody.velocity;
-        currentVelocity += moveInput * moveSpeed;
+        currentVelocity += new Vector2(moveInput.x * moveSpeed, 0);
 
         if (Mathf.Abs(currentVelocity.x) < 0.01f)
         {
@@ -106,7 +107,9 @@ public class PlayerMovement : MonoBehaviour
             jumpBufferCountdown = 0f;
             coyoteTimeCountdown = 0f;
 
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpSpeed);
+            Vector2 newVerticalVelocity = new Vector2(myRigidbody.velocity.x, jumpSpeed);
+            newVerticalVelocity.y = Mathf.Clamp(newVerticalVelocity.y, 0f, maxVerticalSpeed);
+            myRigidbody.velocity = newVerticalVelocity;
         }
     }
 
@@ -133,6 +136,21 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), transform.localScale.y);
         }
+    }
+
+    public float GetHorizontalVelocity()
+    {
+        return myRigidbody.velocity.x;
+    }
+
+    public float GetVerticalVelocity()
+    {
+        return myRigidbody.velocity.y;
+    }
+
+    public bool GetIsGrounded()
+    {
+        return CheckIfGrounded();
     }
 
     private void OnDrawGizmos()
