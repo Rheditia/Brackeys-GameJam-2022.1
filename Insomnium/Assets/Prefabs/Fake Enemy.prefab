@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5875108471935859860}
   - component: {fileID: 144656478}
   m_Layer: 7
-  m_Name: FakeRevGFX
+  m_Name: FakeNotRevGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   damage: 10
   durationToDestroy: 2
   isReal: 0
+  vanishParticle: {fileID: 7850292832728420176, guid: 07f07b3b486dec54e8947b1dd1b219ef, type: 3}
   slowedSpeed: 1
 --- !u!114 &5875108472390632434
 MonoBehaviour:
@@ -334,8 +335,9 @@ GameObject:
   - component: {fileID: 5875108473428952604}
   - component: {fileID: 5875108473428952605}
   - component: {fileID: 75016593}
+  - component: {fileID: 4224189618657882632}
   m_Layer: 7
-  m_Name: FakeNotRevGFX
+  m_Name: FakeRevGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,3 +421,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 5875108472390632433}
+--- !u!95 &4224189618657882632
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875108473428952603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 660fead6d2cb2ba46899129bfa7fadc0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
